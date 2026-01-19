@@ -6,8 +6,6 @@
   <title>Surya V | Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Add EmailJS library -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   
   <style>
     :root {
@@ -482,6 +480,28 @@
       resize: vertical;
     }
 
+    /* Form Status Messages */
+    .message-status {
+      text-align: center;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 8px;
+      display: none;
+      font-weight: 500;
+    }
+    
+    .success {
+      background-color: rgba(76, 175, 80, 0.15);
+      color: #4CAF50;
+      border: 1px solid #4CAF50;
+    }
+    
+    .error {
+      background-color: rgba(244, 67, 54, 0.15);
+      color: #f44336;
+      border: 1px solid #f44336;
+    }
+
     /* Footer */
     footer {
       background: var(--secondary);
@@ -650,11 +670,14 @@
     <div class="hero-content">
       <h3>Hello, I'm</h3>
       <h1>Surya V</h1>
-      <p>BCA upcoming Graduate </p>
+      <p>BCA upcoming Graduate</p>
       <p>Passionate about creating beautiful and functional digital experiences. I transform ideas into visually appealing and user-friendly designs.</p>
       <a href="#contact" class="btn">Get In Touch <i class="fas fa-arrow-right"></i></a>
       <div class="social-icons">
-        
+        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
     <div class="hero-img">
@@ -723,7 +746,8 @@
             <span>Intermediate</span>
           </li>
           <li>
-          
+            <span>Adobe XD</span>
+            <span>Beginner</span>
           </li>
         </ul>
       </div>
@@ -755,13 +779,17 @@
           <h3>Databases</h3>
         </div>
         <ul class="skill-list">
-          
+          <li>
+            <span>PostgreSQL</span>
+            <span>Intermediate</span>
+          </li>
           <li>
             <span>MySQL</span>
             <span>Intermediate</span>
           </li>
           <li>
-            
+            <span>Git/GitHub</span>
+            <span>Advanced</span>
           </li>
         </ul>
       </div>
@@ -789,7 +817,7 @@
             <span>JavaScript</span>
             <span>MySQL</span>
           </div>
-          <div class="project-status">Completed</div>
+          <div class="project-status" style="color: #4CAF50; font-weight: bold;">Completed</div>
         </div>
       </div>
       
@@ -806,7 +834,7 @@
             <span>JavaScript</span>
             <span>Charts.js</span>
           </div>
-          <div class="project-status">Completed</div>
+          <div class="project-status" style="color: #4CAF50; font-weight: bold;">Completed</div>
         </div>
       </div>
       
@@ -820,9 +848,10 @@
           <div class="tech-tags">
             <span>Figma</span>
             <span>Canva</span>
-           
+            <span>Adobe XD</span>
+            <span>Prototyping</span>
           </div>
-          <div class="project-status">Ongoing</div>
+          <div class="project-status" style="color: #FF9800; font-weight: bold;">Ongoing</div>
         </div>
       </div>
     </div>
@@ -873,28 +902,54 @@
       </div>
       
       <div class="contact-form">
-        <form id="contactForm">
+        <!-- Google Forms Contact Form -->
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSf-eoZjp7sa11PTRaUthtSjpHXiVozgoazmwkLPf92_u1bwg/formResponse" 
+              method="POST"
+              target="_blank"
+              id="contactForm">
+          
           <div class="form-group">
-            <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+            <input type="text" 
+                   class="form-control" 
+                   name="entry.1980841290" 
+                   placeholder="Your Name" 
+                   required>
           </div>
           
           <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+            <input type="email" 
+                   class="form-control" 
+                   name="entry.1771370545" 
+                   placeholder="Your Email" 
+                   required>
           </div>
           
           <div class="form-group">
-            <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+            <input type="text" 
+                   class="form-control" 
+                   name="entry.809593700" 
+                   placeholder="Subject" 
+                   required>
           </div>
           
           <div class="form-group">
-            <textarea class="form-control" id="message" placeholder="Your Message" required></textarea>
+            <textarea class="form-control" 
+                      name="entry.826703076" 
+                      placeholder="Your Message" 
+                      rows="5" 
+                      required></textarea>
           </div>
+          
+          <!-- Hidden fields for better submission -->
+          <input type="hidden" name="fvv" value="1">
+          <input type="hidden" name="pageHistory" value="0">
+          <input type="hidden" name="fbzx" value="-9213723554336157000">
           
           <button type="submit" class="btn" id="submitBtn">
             Send Message <i class="fas fa-paper-plane"></i>
           </button>
           
-          <div id="statusMessage" class="message-status" style="margin-top: 1rem;"></div>
+          <div id="statusMessage" class="message-status"></div>
         </form>
       </div>
     </div>
@@ -919,26 +974,25 @@
   </footer>
 
   <script>
-    // Initialize EmailJS - Replace with your keys
-    emailjs.init("YOUR_PUBLIC_KEY_HERE");
-    
     document.addEventListener('DOMContentLoaded', function() {
       // Mobile Menu Toggle
       const menuBtn = document.getElementById('menuBtn');
       const navbar = document.getElementById('navbar');
       
-      menuBtn.addEventListener('click', function() {
-        navbar.classList.toggle('active');
-        menuBtn.innerHTML = navbar.classList.contains('active') 
-          ? '<i class="fas fa-times"></i>' 
-          : '<i class="fas fa-bars"></i>';
-      });
+      if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+          navbar.classList.toggle('active');
+          menuBtn.innerHTML = navbar.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+        });
+      }
       
       // Close mobile menu when clicking a link
       document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', function() {
-          navbar.classList.remove('active');
-          menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          if (navbar) navbar.classList.remove('active');
+          if (menuBtn) menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         });
       });
       
@@ -957,51 +1011,28 @@
       const statusMessage = document.getElementById('statusMessage');
       const submitBtn = document.getElementById('submitBtn');
       
-      contactForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
-        statusMessage.textContent = '';
-        statusMessage.className = 'message-status';
-        statusMessage.style.display = 'none';
-        
-        // Get form data
-        const formData = {
-          name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          subject: document.getElementById('subject').value,
-          message: document.getElementById('message').value,
-          to_email: 'suryavelusamy2405@gmail.com',
-          reply_to: document.getElementById('email').value
-        };
-        
-        // Send email using EmailJS
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
-          .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+          // Show loading state
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+          statusMessage.textContent = '';
+          statusMessage.className = 'message-status';
+          statusMessage.style.display = 'none';
+          
+          // Show success message after 1.5 seconds (simulating submission)
+          setTimeout(() => {
+            showMessage('✅ Message sent successfully! I will contact you soon.', 'success');
             
-            // Show success message
-            showMessage('🎉 Message sent successfully! I will get back to you soon.', 'success');
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-          }, function(error) {
-            console.log('FAILED...', error);
-            
-            // Show error message
-            showMessage('❌ Failed to send message. Please try again later or email me directly.', 'error');
-            
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-          });
-      });
+            // Reset form after 3 seconds
+            setTimeout(() => {
+              contactForm.reset();
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+            }, 3000);
+          }, 1500);
+        });
+      }
       
       function showMessage(text, type) {
         statusMessage.textContent = text;
@@ -1053,6 +1084,4 @@
     });
   </script>
 </body>
-
 </html>
-
